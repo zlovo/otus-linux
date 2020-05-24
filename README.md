@@ -82,8 +82,20 @@ Consistency Policy : resync
 ```
 * ## creating mdadm.conf
 * check the information is correct 
-```[vagrant@otuslinux ~]$ sudo mdadm --detail --scan --verbose
+```
+[vagrant@otuslinux ~]$ sudo mdadm --detail --scan --verbose
 ARRAY /dev/md0 level=raid6 num-devices=5 metadata=1.2 name=otuslinux:0 UUID=69c21eeb:d82eb529:2295cdad:237c74f4
-   devices=/dev/sdb,/dev/sdc,/dev/sdd,/dev/sde,/dev/sdf```
+   devices=/dev/sdb,/dev/sdc,/dev/sdd,/dev/sde,/dev/sdf
+```
+* login as root user and create file ` /etc/mdadm/mdadm.conf`
+* write into `mdadm.conf` with command `echo "DEVICE partitions" > /etc/mdadm/mdadm.conf`
+* update mdadm.cong with `mdadm --detail --scan --verbose | awk '/ARRAY/ {print}' >> /etc/mdadm/mdadm.conf`
+* read content of mdadm.conf ==>
+```
+DEVICE partitions
+ARRAY /dev/md0 level=raid6 num-devices=5 metadata=1.2 name=otuslinux:0 UUID=69c21eeb:d82eb529:2295cdad:237c74f4
+```
+
+
    
 
